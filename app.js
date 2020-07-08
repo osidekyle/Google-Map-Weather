@@ -37,20 +37,38 @@ function initMap(){
     map.addListener("click",function(mapsMouseEvent){
         calcLong=mapsMouseEvent.latLng.lng();
         calcLat=mapsMouseEvent.latLng.lat();
-        console.log(`(${calcLat},${calcLong})`);
-    })
+        
+        
+        const proxy="https://cors-anywhere.herokuapp.com/";
+
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": `${proxy}https://api.darksky.net/forecast/fd9d9c6418c23d94745b836767721ad1/${calcLat},${calcLong}`,
+            "method": "GET",
+        
+        }
+        $.ajax(settings).done((res)=>res)
+        .then(data=>data.currently)
+        .then(current=>{
+            console.log(current.apparentTemperature)
+            $("#output").html(Mustache.render($("#template").html(),current))
+        })
 
 
 
 
-    }
+
+
+    });
 
 
 
 
 
     
-
+}
     
 
 
