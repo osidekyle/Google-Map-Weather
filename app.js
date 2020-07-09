@@ -39,29 +39,32 @@ function initMap(){
         calcLat=mapsMouseEvent.latLng.lat();
         
         
-        const proxy="https://cors-anywhere.herokuapp.com/";
-
-
-        var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": `${proxy}https://api.darksky.net/forecast/fd9d9c6418c23d94745b836767721ad1/${calcLat},${calcLong}`,
-            "method": "GET",
         
+
+        
+        var settings = {
+        "async": true,
+	    "crossDomain": true,
+	    "url": `http://api.openweathermap.org/data/2.5/weather?lat=${calcLat}&lon=${calcLong}&units=imperial&appid=41b2a550cdd10b9407d8689a269e8ab8`,
+	    "method": "GET",
+	    
         }
+        
+        
         $.ajax(settings).done((res)=>res)
-        .then(data=>data.currently)
-        .then(current=>{
-            console.log(current.apparentTemperature)
-            $("#output").html(Mustache.render($("#template").html(),current))
+        .then(main=>{
+            $("#output").html(Mustache.render($("#template").html(),main))})
+            
+
+        
         })
 
 
+        
 
 
 
 
-    });
 
 
 

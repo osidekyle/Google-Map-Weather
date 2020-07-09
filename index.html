@@ -22,11 +22,19 @@
     </div>
     </div>
     <template id="template">
-        <p id="temp">{{apparentTemperature}}</p>
+        <h1 class="display-4">{{name}}, {{sys.country}}</h1>
+        <h1 class="display-3" id="temp">{{main.temp}}<span id="unit"> F</span></h1>
+        <h1 class="display-4" id="humidity">Humidity: {{main.humidity}}%</h1>
+        <img id="weatherIcon" src="http://openweathermap.org/img/wn/{{#weather}}{{#.}}{{icon}}{{/.}}{{/weather}}@2x.png" alt="weather icon">
+        
     </template>
 
 
-    <div id="output">
+    <div  class="row weather justify-content-center">
+        <div id="output" class="col-xs-12">
+            <h1 id="temp"></h1>
+
+        </div>
 
     </div>
 
